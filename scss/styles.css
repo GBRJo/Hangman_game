@@ -1,0 +1,32 @@
+@import "./normalize.css";
+body {
+  min-height: 100vh;
+  background-color: #F1F2F2;
+  color: #28283B;
+  font-family: "Inter", sans-serif;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(360px, auto));
+  grid-template-areas: "aside main";
+}
+
+aside {
+  grid-area: aside;
+}
+
+main {
+  grid-area: main;
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1440px) {
+  body {
+    grid-template-areas: "aside" "main";
+  }
+}
+@media only screen and (min-width: 360px) and (max-width: 768px) {
+  body {
+    grid-template-areas: "aside" "main";
+  }
+}
+.body__element1 {
+  background-color: #D9FE95;
+}/*# sourceMappingURL=styles.css.map */
