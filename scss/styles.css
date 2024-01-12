@@ -1,6 +1,7 @@
 @import "./normalize.css";
 body {
-  min-height: 100vh;
+  height: 100vh;
+  grid-template-rows: 1fr;
   background-color: #f1f2f2;
   color: #28283b;
   font-family: "Inter", sans-serif;
@@ -89,4 +90,111 @@ main {
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 48px 24px;
+}
+
+.word__container {
+  padding-left: 24px;
+  padding-right: 24px;
+  max-width: 560px;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  margin: auto;
+}
+
+.hint {
+  padding-top: 96px;
+  padding-bottom: 48px;
+  display: flex;
+  gap: 96px;
+  justify-content: space-between;
+  font-family: Inter;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.hint__number {
+  color: #c9d0d5;
+  text-align: right;
+  font-family: Inter;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+span {
+  color: #c9d0d5;
+  font-weight: 400;
+}
+
+.word {
+  padding-bottom: 96px;
+  display: flex;
+  flex-direction: column;
+}
+
+.word__guessfield {
+  font-family: Inter;
+  font-size: 48px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.word__underline {
+  width: 100%;
+  height: 1px;
+  background-color: #c9d0d5;
+}
+
+.word__keyboard {
+  padding-top: 48px;
+  display: grid;
+  grid-column-gap: 8px;
+  grid-row-gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(38px, auto));
+}
+
+.word__keyboard--letter {
+  padding: 16px 12px;
+  border: solid 1px #28283b;
+  font-family: Inter;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.word__keyboard--letter:hover {
+  border: none;
+  background-color: #d9fe95;
+  border: solid 1px #d9fe95;
+  cursor: pointer;
+}
+
+.word__keyboard--letter:active {
+  border: none;
+  background-color: #d9fe95;
+}
+
+.word__info {
+  display: flex;
+  gap: 96px;
+  justify-content: space-between;
+  padding-top: 24px;
+  color: #c9d0d5;
+  font-family: Inter;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: normal;
+}
+
+.word__info--header {
+  flex-shrink: 0;
 }/*# sourceMappingURL=styles.css.map */
