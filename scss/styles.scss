@@ -1,32 +1,109 @@
 @import "./normalize.css";
 
-body {
-    min-height: 100vh;
-    background-color: #F1F2F2;
-    color: #28283B;
-    font-family: 'Inter', sans-serif;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(360px, auto));
-    grid-template-areas: "aside main";
-  }
+$white-color: #f1f2f2;
+$black-color: #28283b;
+$green-color: #d9fe95;
+$grey-color: #c9d0d5;
 
-aside {grid-area: aside;}
-main {grid-area: main;} 
+body {
+  min-height: 100vh;
+  background-color: $white-color;
+  color: $black-color;
+  font-family: "Inter", sans-serif;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(360px, auto));
+  grid-template-areas: "aside main";
+}
+
+aside {
+  grid-area: aside;
+}
+main {
+  grid-area: main;
+}
 
 @media only screen and (min-width: 768px) and (max-width: 1440px) {
-    body {grid-template-areas: "aside"
-                               "main" 
-    }
-    
+  body {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+    grid-template-areas:
+      "aside"
+      "main";
+  }
 }
 
 @media only screen and (min-width: 360px) and (max-width: 768px) {
-    body {grid-template-areas: "aside"
-                               "main" 
+    body {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto;
+        grid-template-areas:
+          "aside"
+          "main";
+      }
+    }
+
+.head {
+    width: 200px;
+    height: 227px;
+    background-image: url(/assets/head.svg);
 }
 
+.bodyHands {
+    display: flex;
+    flex-direction: row;
+}
+
+.body {
+    width: 158px;
+    height: 71.64px;
+    background-image: url(/assets/body.svg);
+}
+
+.leftHand {
+    width: 70px;
+    height: 71.64px;
+    background-image: url(/assets/hand.svg);
+}
+
+.rightHand {
+    width: 70px;
+    height: 71.64px;
+    background-image: url(/assets/hand.svg);
+}
+
+.legs {
+    display: flex;
+    flex-direction: row;
+    padding-bottom: 64px;
+}
+
+.rightLeg {
+    width: 64px;
+    height: 75px;
+    background-image: url(/assets/leg.svg);
+}
+
+.leftLeg {
+    width: 64px;
+    height: 75px;
+    background-image: url(/assets/leg.svg);
 }
 
 .body__element1 {
-    background-color: #D9FE95;
+  background-color: $green-color;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hangman__container {
+   
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+
+  
+}
+
+.word__container {
 }
