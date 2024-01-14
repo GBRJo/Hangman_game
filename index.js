@@ -9,21 +9,31 @@ var worlds = [
   "eighthworld",
 ];
 
-var bodyParts = 6;
+var bodyParts = 0;
 
-var guessedLetters = [];
+var  enteredLetters = [];
 
 var selectedWord = worlds[Math.floor(Math.random() * worlds.length)];
 
+
+
 // Создаем элементы DOM 
+var bodyElement2 = document.createElement("div");
+bodyElement2.className = "body__element body__element2";
+document.body.insertBefore(bodyElement2, document.body.firstChild);
+
 var bodyElement1 = document.createElement("div");
 bodyElement1.className = "body__element body__element1";
-document.body.appendChild(bodyElement1);
+document.body.insertBefore(bodyElement1, document.body.firstChild);
 
 var hangmanContainer = document.createElement("div");
 hangmanContainer.className = "hangman__container";
 hangmanContainer.id = "hangman__container";
 bodyElement1.appendChild(hangmanContainer);
+
+var hang = document.createElement("div");
+hang.className = "hang";
+hangmanContainer.appendChild(hang);
 
 var head = document.createElement("div");
 head.className = "head";
@@ -57,10 +67,6 @@ var rightLeg = document.createElement("div");
 rightLeg.className = "rightLeg";
 legs.appendChild(rightLeg);
 
-var bodyElement2 = document.createElement("div");
-bodyElement2.className = "body__element body__element2";
-document.body.appendChild(bodyElement2);
-
 var wordContainer = document.createElement("div");
 wordContainer.className = "word__container";
 bodyElement2.appendChild(wordContainer);
@@ -83,9 +89,9 @@ var word = document.createElement("div");
 word.className = "word";
 wordContainer.appendChild(word);
 
-var wordGuessField = document.createElement("div");
+var wordGuessField = document.createElement("input");
 wordGuessField.className = "word__guessfield";
-wordGuessField.textContent = "conditioner";
+wordGuessField.id = "guess_field";
 word.appendChild(wordGuessField);
 
 var wordUnderline = document.createElement("div");
@@ -106,6 +112,7 @@ for (var i = 0; i < alphabet.length; i++) {
 
 var wordInfo = document.createElement("div");
 wordInfo.className = "word__info";
+wordInfo.id = "button";
 word.appendChild(wordInfo);
 
 var wordInfoContent = document.createElement("div");
@@ -117,3 +124,74 @@ var wordInfoHeader = document.createElement("div");
 wordInfoHeader.className = "word__info--header";
 wordInfoHeader.textContent = "how to play?";
 wordInfo.appendChild(wordInfoHeader);
+
+// Отображаем висельника
+function showHangman() {
+    var parts = ["hang", "head", "body", "leftHand", "rightHand", "leftLeg", "rightLeg"];
+let hang = document.querySelector(".hang");
+      var currentPart = document.querySelector("." + parts[bodyParts]);
+      currentPart.style.display = "block";
+      if (currentPart !== hang) {
+        hang.style.display = "none";
+      }
+     
+      }
+  
+  window.addEventListener("DOMContentLoaded", showHangman);
+
+
+  // Отображаем угаданные буквы
+function showWord() {
+    var textField = document.getElementById("guess_field");
+
+    for (let i = 0; i < selectedWord.length; i++) {
+        let rightLetter = selectedWord[i];
+
+        if (enteredLetters.includes(rightLetter)) {
+            textField.value += letter;
+        } else {
+            textField.value += "*";
+    }
+}
+}
+
+  // Обрабатываем введённые буквы
+
+  var letterDivs = document.getElementsByClassName("word__keyboard--letter");
+  
+  function userLetters(letterDivs) {
+    for (let i = 0; i < letterDivs.length; i++) {
+      letterDivs[i].addEventListener("click", function() {
+        let letter = this.textContent.toLowerCase();
+        enteredLetters.push(letter);
+  
+       
+  
+        if (!selectedWord.includes(letter)) {
+          bodyParts++;
+        }
+        
+        console.log(enteredLetters);
+        showHangman();
+        showWord();
+      });
+    }
+  }
+   userLetters(letterDivs)
+
+//var letterDivs = document.getElementsByClassName("word__keyboard--letter");
+//var textField = document.getElementById("guess_field");
+//textField.placeholder = "*".repeat(selectedWord.length);
+//function ssss(letterDivs){
+//for (let i = 0; i < letterDivs.length; i++) {
+ //letterDivs[i].addEventListener("click", function() {
+   // let letter = this.textContent.toLowerCase();
+    // console.log(letter);
+    //  textField.value += letter;
+       
+// });
+//}
+//}
+
+//ssss(letterDivs);
+  
