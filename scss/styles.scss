@@ -205,9 +205,10 @@ line-height: normal;
     cursor: pointer;
 }
 
-.word__keyboard--letter:active {
-    border: none;
-    background-color: $green-color;
+.word__keyboard--letter:active,
+.word__keyboard--letter.active {
+  border: none;
+  background-color: $green-color;
 }
 
 .word__info {

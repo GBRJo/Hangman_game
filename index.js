@@ -14,6 +14,7 @@ var bodyParts = 0;
 var  enteredLetters = [];
 
 var selectedWord = worlds[Math.floor(Math.random() * worlds.length)];
+console.log(selectedWord);
 
 
 
@@ -141,43 +142,54 @@ let hang = document.querySelector(".hang");
 
 
   // Отображаем угаданные буквы
-function showWord() {
-    var textField = document.getElementById("guess_field");
+  var textField = document.getElementById("guess_field");
+   textField.value = "*".repeat(selectedWord.length);
 
-    for (let i = 0; i < selectedWord.length; i++) {
-        let rightLetter = selectedWord[i];
-
-        if (enteredLetters.includes(rightLetter)) {
-            textField.value += letter;
-        } else {
-            textField.value += "*";
+   function showWord() {
+    let wordArray = selectedWord.split("");
+    let updatedWordArray = [];
+  
+    for (let i = 0; i < wordArray.length; i++) {
+      if (enteredLetters.includes(wordArray[i])) {
+        updatedWordArray.push(wordArray[i]);
+      } else {
+        updatedWordArray.push("*");
+      }
     }
-}
-}
+  
+    let updatedWord = updatedWordArray.join("");
+    textField.value = updatedWord;
+  }
 
   // Обрабатываем введённые буквы
-
   var letterDivs = document.getElementsByClassName("word__keyboard--letter");
-  
+
   function userLetters(letterDivs) {
     for (let i = 0; i < letterDivs.length; i++) {
       letterDivs[i].addEventListener("click", function() {
         let letter = this.textContent.toLowerCase();
         enteredLetters.push(letter);
   
-       
-  
         if (!selectedWord.includes(letter)) {
           bodyParts++;
         }
-        
+  
         console.log(enteredLetters);
         showHangman();
         showWord();
+  
+        this.classList.add("active");
+  
+ //       if (isWordGuessed()) {
+ //         for (let j = 0; j < letterDivs.length; j++) {
+  //          letterDivs[j].classList.remove("active");
+  //        }
+ //       }
       });
     }
   }
-   userLetters(letterDivs)
+  
+  userLetters(letterDivs);
 
 //var letterDivs = document.getElementsByClassName("word__keyboard--letter");
 //var textField = document.getElementById("guess_field");

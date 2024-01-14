@@ -192,7 +192,8 @@ span {
   cursor: pointer;
 }
 
-.word__keyboard--letter:active {
+.word__keyboard--letter:active,
+.word__keyboard--letter.active {
   border: none;
   background-color: #d9fe95;
 }
