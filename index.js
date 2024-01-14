@@ -180,30 +180,34 @@ let hang = document.querySelector(".hang");
   
         this.classList.add("active");
   
- //       if (isWordGuessed()) {
- //         for (let j = 0; j < letterDivs.length; j++) {
-  //          letterDivs[j].classList.remove("active");
-  //        }
- //       }
+       if (isWordGuessed()) {
+          for (let j = 0; j < letterDivs.length; j++) {
+          letterDivs[j].classList.remove("active");
+        }
+       }
+
+ if (bodyParts === 7) {
+    alert ("You loose");
+    isWordGuessed();
+    resetGame();
+ } else if (selectedWord === updatedWord) {
+    alert ("You loose");
+    isHangmanHanged();
+    resetGame();
+ }
       });
     }
   }
   
   userLetters(letterDivs);
 
-//var letterDivs = document.getElementsByClassName("word__keyboard--letter");
-//var textField = document.getElementById("guess_field");
-//textField.placeholder = "*".repeat(selectedWord.length);
-//function ssss(letterDivs){
-//for (let i = 0; i < letterDivs.length; i++) {
- //letterDivs[i].addEventListener("click", function() {
-   // let letter = this.textContent.toLowerCase();
-    // console.log(letter);
-    //  textField.value += letter;
-       
-// });
-//}
-//}
+// Сбрасываем игру
+function resetGame() {
+    bodyParts = 0;
+    var selectedWord = worlds[Math.floor(Math.random() * worlds.length)];
+    console.log(selectedWord);
+    showHangman();
+    showWord();
+  }
 
-//ssss(letterDivs);
   
