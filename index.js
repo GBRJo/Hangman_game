@@ -1,12 +1,14 @@
 var questionsAndWords = {
   "a large predatory mammal, symbolizing strength and power": "lion",
   "an organ inside the head responsible for thinking and perception": "brain",
-  "a liquid necessary for life, making up a large part of Earth's surface": " water",
+  "a liquid necessary for life, making up a large part of Earth's surface":
+    " water",
   "a fast means of transportation with two wheels": "bike",
-  "a massive celestial object that emits light due to nuclear reactions": "star",
+  "a massive celestial object that emits light due to nuclear reactions":
+    "star",
   "a small flying insect that can produce a buzzing sound": "fly",
   "a sweet, edible fruit with a yellow peel": "banana",
-  "a musical instrument with black and white keys": "piano"
+  "a musical instrument with black and white keys": "piano",
 };
 
 var questions = Object.keys(questionsAndWords);
@@ -18,10 +20,9 @@ console.log(selectedWord);
 
 var bodyParts = 0;
 
-var  enteredLetters = [];
+var enteredLetters = [];
 
-
-// Создаем элементы DOM 
+// Создаем элементы DOM
 var bodyElement2 = document.createElement("div");
 bodyElement2.className = "body__element body__element2";
 document.body.insertBefore(bodyElement2, document.body.firstChild);
@@ -121,12 +122,13 @@ word.appendChild(wordInfo);
 
 var wordInfoContent = document.createElement("div");
 wordInfoContent.className = "word__info--content";
-wordInfoContent.textContent = "Read the hint and try to guess the word letter by letter. You can make 6 mistakes. Once the hangman is hanged, the game will end.";
+wordInfoContent.textContent =
+  "Read the hint and try to guess the word letter by letter. You can make 6 mistakes. Once the man is hanged, the game will end.";
 wordInfo.appendChild(wordInfoContent);
 
 var wordInfoHeader = document.createElement("div");
 wordInfoHeader.className = "word__info--header";
-wordInfoHeader.textContent = "how to play?";
+wordInfoHeader.textContent = "--how to play?";
 wordInfo.appendChild(wordInfoHeader);
 
 var modalLoose = document.createElement("div");
@@ -173,159 +175,167 @@ closeButton.className = "modal__close";
 closeButton.textContent = "Try Again";
 modalContent.appendChild(closeButton);
 
-
 // Отображаем висельника
 function showHangman() {
-    var parts = ["hang", "head", "body", "leftHand", "rightHand", "leftLeg", "rightLeg"];
-let hang = document.querySelector(".hang");
-      var currentPart = document.querySelector("." + parts[bodyParts]);
-      currentPart.style.display = "block";
-      if (currentPart !== hang) {
-        hang.style.display = "none";
-      } else if (currentPart === hang) {
-        head.style.display = "none";
-        body.style.display = "none";
-        leftHand.style.display = "none";
-        rightHand.style.display = "none";
-        leftLeg.style.display = "none";
-        rightLeg.style.display = "none";
-      }
-      if (currentPart === rightLeg) {
-        isHanged();
-       
-     }
-      }
-  
-  window.addEventListener("DOMContentLoaded", showHangman);
+  var parts = [
+    "hang",
+    "head",
+    "body",
+    "leftHand",
+    "rightHand",
+    "leftLeg",
+    "rightLeg",
+  ];
+  let hang = document.querySelector(".hang");
+  var currentPart = document.querySelector("." + parts[bodyParts]);
+  currentPart.style.display = "block";
+  if (currentPart !== hang) {
+    hang.style.display = "none";
+  } else if (currentPart === hang) {
+    head.style.display = "none";
+    body.style.display = "none";
+    leftHand.style.display = "none";
+    rightHand.style.display = "none";
+    leftLeg.style.display = "none";
+    rightLeg.style.display = "none";
+  }
+  if (currentPart === rightLeg) {
+    isHanged();
+  }
+}
 
+window.addEventListener("DOMContentLoaded", showHangman);
 
-  // Отображаем угаданные буквы
-  var textField = document.getElementById("guess_field");
-   textField.value = "*".repeat(selectedWord.length);
+// Отображаем угаданные буквы
+var textField = document.getElementById("guess_field");
+textField.value = "*".repeat(selectedWord.length);
 
-   function showWord() {
-    let wordArray = selectedWord.split("");
-    let updatedWordArray = [];
-  
-    for (let i = 0; i < wordArray.length; i++) {
-      if (enteredLetters.includes(wordArray[i])) {
-        updatedWordArray.push(wordArray[i]);
+function showWord() {
+  let wordArray = selectedWord.split("");
+  let updatedWordArray = [];
+
+  for (let i = 0; i < wordArray.length; i++) {
+    if (enteredLetters.includes(wordArray[i])) {
+      updatedWordArray.push(wordArray[i]);
+    } else {
+      updatedWordArray.push("*");
+    }
+  }
+
+  let updatedWord = updatedWordArray.join("");
+  textField.value = updatedWord;
+
+  if (selectedWord === updatedWord) {
+    isWordGuessed();
+  }
+}
+
+// Обрабатываем введённые буквы
+var letterDivs = document.getElementsByClassName("word__keyboard--letter");
+
+function userLetters(letterDivs) {
+  for (let i = 0; i < letterDivs.length; i++) {
+    letterDivs[i].addEventListener("click", function () {
+      let letter = this.textContent.toLowerCase();
+
+      if (enteredLetters.includes(letter)) {
+        wordInfoContent.innerHTML =
+          "<span>You have already chose this letter. Try another one.</span>";
+        wordInfoHeader.innerHTML = "<span>--alert</span>";
+        return;
       } else {
-        updatedWordArray.push("*");
+        wordInfoContent.textContent =
+          "Read the hint and try to guess the word letter by letter. You can make 6 mistakes. Once the man is hanged, the game will end.";
+        wordInfoHeader.textContent = "--how to play?";
       }
-    }
-  
-    let updatedWord = updatedWordArray.join("");
-    textField.value = updatedWord;
+      enteredLetters.push(letter);
 
-    if (selectedWord === updatedWord) {
-      isWordGuessed();
+      if (!selectedWord.includes(letter)) {
+        bodyParts++;
       }
+
+      console.log(enteredLetters);
+      showHangman();
+      showWord();
+
+      this.classList.add("active");
+    });
   }
+}
 
-  // Обрабатываем введённые буквы
-  var letterDivs = document.getElementsByClassName("word__keyboard--letter");
+userLetters(letterDivs);
 
-  function userLetters(letterDivs) {
-    for (let i = 0; i < letterDivs.length; i++) {
-      letterDivs[i].addEventListener("click", function() {
-        let letter = this.textContent.toLowerCase();
-        
-        if (enteredLetters.includes(letter)) {
-          wordInfoContent.innerHTML = "<span>You have already chose this letter. Try another one.</span>";
-          wordInfoHeader.innerHTML = "<span>alert</span>";
-          return;
-        } else {
-          wordInfoContent.textContent = "Read the hint and try to guess the word letter by letter. You can make 6 mistakes. Once the hangman is hanged, the game will end.";
-          wordInfoHeader.textContent = "how to play?";
-        }
-        enteredLetters.push(letter);
-  
-        if (!selectedWord.includes(letter)) {
-          bodyParts++;
-        }
-  
-        console.log(enteredLetters);
-        showHangman();
-        showWord();
-  
-        this.classList.add("active");
-  
-     
-      });
+document.addEventListener("keydown", function (event) {
+  let letter = event.key.toLowerCase();
+
+  if (/^[a-z]$/i.test(letter)) {
+    if (!enteredLetters.includes(letter)) {
+      wordInfoContent.innerHTML =
+        "Read the hint and try to guess the word letter by letter. You can make 6 mistakes. Once the man is hanged, the game will end.";
+      wordInfoHeader.textContent = "--how to play?";
+      enteredLetters.push(letter);
+
+      if (!selectedWord.includes(letter)) {
+        bodyParts++;
+      }
+
+      console.log(enteredLetters);
+      showHangman();
+      showWord();
+
+      let letterButtons = Array.from(letterDivs);
+      let matchedButton = letterButtons.find(
+        (button) => button.textContent.toLowerCase() === letter
+      );
+      matchedButton.classList.add("active");
+    } else {
+      wordInfoContent.innerHTML =
+        "<span>You have already chosen this letter. Try another one.</span>";
+      wordInfoHeader.innerHTML = "<span>--alert</span>";
     }
+  } else {
+    wordInfoContent.innerHTML =
+      "<span>Invalid input. Please enter a valid letter or check your keyboard layout.</span>";
+    wordInfoHeader.innerHTML = "<span>--alert</span>";
   }
-  
-  userLetters(letterDivs);
+});
 
-  document.addEventListener("keydown", function(event) {
-    let letter = event.key.toLowerCase();
+// Модальные окна
+function isWordGuessed() {
+  modal.style.display = "flex";
+}
 
-    if (/^[a-z]$/i.test(letter)) {
+closeButton.onclick = function () {
+  modal.style.display = "none";
+  resetGame();
+};
 
-      if (!enteredLetters.includes(letter)) {
-        wordInfoContent.innerHTML = "Read the hint and try to guess the word letter by letter. You can make 6 mistakes. Once the hangman is hanged, the game will end.";
-        wordInfoHeader.textContent = "how to play?";
-        enteredLetters.push(letter);
-  
-        if (!selectedWord.includes(letter)) {
-          bodyParts++;
-        }
-  
-        console.log(enteredLetters);
-        showHangman();
-        showWord();
-  
-        let letterButtons = Array.from(letterDivs);
-        let matchedButton = letterButtons.find(button => button.textContent.toLowerCase() === letter);
-        matchedButton.classList.add("active");
-    
-      } else {
-        wordInfoContent.innerHTML = "<span>You have already chosen this letter. Try another one.</span>";
-        wordInfoHeader.innerHTML = "<span>alert</span>";
-         }
-    }
-    else {
-      wordInfoContent.innerHTML = "<span>Invalid input. Please enter a valid letter or check your keyboard layout.</span>";
-      wordInfoHeader.innerHTML = "<span>alert</span>";
-    }
-  });
-  userLetters(letterDivs);
- // Модальные окна
-  function isWordGuessed() {
-    modal.style.display = "flex";
-    }
+function isHanged() {
+  modalLoose.style.display = "flex";
+}
 
-  closeButton.onclick = function () {
-    modal.style.display = "none";
-    resetGame();
-  }
+closeButtonLoose.onclick = function () {
+  modalLoose.style.display = "none";
+  resetGame();
+};
 
-  function isHanged() {
-    modalLoose.style.display = "flex";
-     }
-
-  closeButtonLoose.onclick = function () {
-    modalLoose.style.display = "none";
-    resetGame();
-  }
-
-  // Сбрасываем игру
-function resetGame() { 
-var selectedQuestion = questions[Math.floor(Math.random() * questions.length)];
-var selectedWord = questionsAndWords[selectedQuestion];
-hintContent.innerHTML = "<span> Hint:</span><br>" + selectedQuestion;
-    console.log(selectedWord);
+// Сбрасываем игру
+function resetGame() {
+  var selectedQuestion =
+    questions[Math.floor(Math.random() * questions.length)];
+  var selectedWord = questionsAndWords[selectedQuestion];
+  hintContent.innerHTML = "<span> Hint:</span><br>" + selectedQuestion;
+  console.log(selectedWord);
   var textField = document.getElementById("guess_field");
- 
-   textField.value = "*".repeat(selectedWord.length);
-    bodyParts = 0;
-    
-    enteredLetters = [];
-    
-    for (let j = 0; j < letterDivs.length; j++) {
-      letterDivs[j].classList.remove("active");
-    }
-    showHangman();
-    showWord();
+
+  textField.value = "*".repeat(selectedWord.length);
+  bodyParts = 0;
+
+  enteredLetters = [];
+
+  for (let j = 0; j < letterDivs.length; j++) {
+    letterDivs[j].classList.remove("active");
   }
+  showHangman();
+  showWord();
+}
