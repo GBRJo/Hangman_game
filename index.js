@@ -20,6 +20,8 @@ console.log(selectedWord);
 
 var bodyParts = 0;
 
+var tries = 6;
+
 var enteredLetters = [];
 
 // Создаем элементы DOM
@@ -122,8 +124,10 @@ word.appendChild(wordInfo);
 
 var wordInfoContent = document.createElement("div");
 wordInfoContent.className = "word__info--content";
-wordInfoContent.textContent =
-  "Read the hint and try to guess the word letter by letter. You can make 6 mistakes. Once the man is hanged, the game will end.";
+wordInfoContent.innerHTML =
+"Read the hint and try to guess the word letter by letter. You can make " +
+"<span>" + tries + "</span>" +
+" mistakes. Once the man is hanged, the game will end.";
 wordInfo.appendChild(wordInfoContent);
 
 var wordInfoHeader = document.createElement("div");
@@ -244,14 +248,17 @@ function userLetters(letterDivs) {
         wordInfoHeader.innerHTML = "<span>--alert</span>";
         return;
       } else {
-        wordInfoContent.textContent =
-          "Read the hint and try to guess the word letter by letter. You can make 6 mistakes. Once the man is hanged, the game will end.";
+        wordInfoContent.innerHTML =
+        "Read the hint and try to guess the word letter by letter. You can make " +
+        "<span>" + tries + "</span>" +
+        " mistakes. Once the man is hanged, the game will end.";
         wordInfoHeader.textContent = "--how to play?";
       }
       enteredLetters.push(letter);
 
       if (!selectedWord.includes(letter)) {
         bodyParts++;
+        tries--;
       }
 
       console.log(enteredLetters);
@@ -270,13 +277,17 @@ document.addEventListener("keydown", function (event) {
 
   if (/^[a-z]$/i.test(letter)) {
     if (!enteredLetters.includes(letter)) {
-      wordInfoContent.innerHTML =
-        "Read the hint and try to guess the word letter by letter. You can make 6 mistakes. Once the man is hanged, the game will end.";
+         wordInfoContent.innerHTML =
+        "Read the hint and try to guess the word letter by letter. You can make " +
+        "<span>" + tries + "</span>" +
+        " mistakes. Once the man is hanged, the game will end.";
+      
       wordInfoHeader.textContent = "--how to play?";
       enteredLetters.push(letter);
 
       if (!selectedWord.includes(letter)) {
         bodyParts++;
+        tries--;
       }
 
       console.log(enteredLetters);
