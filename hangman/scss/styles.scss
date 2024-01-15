@@ -47,8 +47,8 @@ main {
 
 .hang {
     display: none;
-    width: 48px;
-    height: 168px;
+    width: 300px;
+    height: 440px;
     background-image: url(../assets/hang.svg); 
 }    
 
@@ -57,11 +57,15 @@ main {
     width: 200px;
     height: 227px;
     background-image: url(../assets/head.svg);
+    align-self: space-between;
 }
 
 .bodyHands {
+  position: relative;
     display: flex;
     flex-direction: row;
+    width: 300px;
+    justify-content: center;
 }
 
 .body {
@@ -76,6 +80,9 @@ main {
     width: 70px;
     height: 71.64px;
     background-image: url(../assets/hand.svg);
+    align-self: flex-start;
+    position: absolute;
+    left: 8px;
 }
 
 .rightHand {
@@ -83,12 +90,18 @@ main {
     width: 70px;
     height: 71.64px;
     background-image: url(../assets/hand.svg);
+    align-self: flex-end;
+    position: absolute;
+    right: 8px;
 }
 
 .legs {
     display: flex;
+    width: 300px;
     flex-direction: row;
     padding-bottom: 64px;
+    justify-content: center;
+    position: relative;
 }
 
 .rightLeg {
@@ -96,6 +109,8 @@ main {
     width: 64px;
     height: 75px;
     background-image: url(../assets/leg.svg);
+    position: absolute;
+    right: 95px;
 }
 
 .leftLeg {
@@ -103,12 +118,15 @@ main {
     width: 64px;
     height: 75px;
     background-image: url(../assets/leg.svg);
+    position: absolute;
+    left: 80px;
 }
 
 .body__element1 {
   background-color: $green-color;
   display: flex;
   justify-content: center;
+
   align-items: center;
 }
 
@@ -117,6 +135,8 @@ main {
    flex-direction: column;
    align-items: center;
 padding: 48px 24px;
+width: 300px;
+height: 440px;
   
 }
 
