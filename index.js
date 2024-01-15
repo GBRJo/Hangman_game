@@ -20,7 +20,7 @@ console.log(selectedWord);
 
 var bodyParts = 0;
 
-var tries =6;
+var tries;
 
 var enteredLetters = [];
 
@@ -124,10 +124,7 @@ word.appendChild(wordInfo);
 
 var wordInfoContent = document.createElement("div");
 wordInfoContent.className = "word__info--content";
-wordInfoContent.innerHTML =
-"Read the hint and try to guess the word letter by letter. You can make " +
-"<span>" + tries + "</span>" +
-" mistakes. Once the man is hanged, the game will end.";
+
 wordInfo.appendChild(wordInfoContent);
 
 var wordInfoHeader = document.createElement("div");
@@ -196,7 +193,6 @@ function showHangman() {
   if (currentPart !== hang) {
     hang.style.display = "none";
   } else if (currentPart === hang) {
-    tries = 5
     head.style.display = "none";
     body.style.display = "none";
     leftHand.style.display = "none";
@@ -206,26 +202,36 @@ function showHangman() {
   }
   if (currentPart === rightLeg) {
     isHanged();
-    tries = 0
   }
-  if (currentPart === head) {
-       tries = 4
-  }
-  if (currentPart === body) {
-    tries = 3;
-  }
-  if (currentPart === leftHand) {
-    tries = 2
-  }
-  if (currentPart === rightHand) {
-    tries = 1
-  }
-  if (currentPart === leftLeg) {
-    tries = 0;
-  }
+
   }
 
 window.addEventListener("DOMContentLoaded", showHangman);
+showHangman();
+// Настройка счетчика попыток
+function showTries() {
+  if (head.style.display === "none" && body.style.display === "none" && leftHand.style.display === "none" && rightHand.style.display === "none" && leftLeg.style.display === "none" && rightLeg.style.display === "none") {
+      tries = 6;
+  } else if (head.style.display === "block" && body.style.display === "none") {
+      tries = 5;
+  } else if (head.style.display === "block" && body.style.display === "block" && leftHand.style.display === "none") {
+      tries = 4;
+  } else if (head.style.display === "block" && body.style.display === "block" && leftHand.style.display === "block" && rightHand.style.display === "none") {
+      tries = 3;
+  } else if (head.style.display === "block" && body.style.display === "block" && leftHand.style.display === "block" && rightHand.style.display === "block" && leftLeg.style.display === "none") {
+      tries = 2;
+  } else if (head.style.display === "block" && body.style.display === "block" && leftHand.style.display === "block" && rightHand.style.display === "block" && leftLeg.style.display === "block" && rightLeg.style.display === "none") {
+      tries = 1;
+  } else if (head.style.display === "block" && body.style.display === "block" && leftHand.style.display === "block" && rightHand.style.display === "block" && leftLeg.style.display === "block" && rightLeg.style.display === "block") {
+      tries = 0;
+  }
+  wordInfoContent.innerHTML =
+"Read the hint and try to guess the word letter by letter. You can make " +
+"<span>" + tries + "</span>" +
+" mistakes. Once the man is hanged, the game will end.";
+}
+
+showTries();
 
 // Отображаем угаданные буквы
 var textField = document.getElementById("guess_field");
@@ -280,8 +286,10 @@ function userLetters(letterDivs) {
       console.log(enteredLetters);
       showHangman();
       showWord();
+      showTries();
 
       this.classList.add("active");
+     
     });
   }
 }
@@ -308,6 +316,7 @@ document.addEventListener("keydown", function (event) {
       console.log(enteredLetters);
       showHangman();
       showWord();
+      showTries();
 
       let letterButtons = Array.from(letterDivs);
       let matchedButton = letterButtons.find(
@@ -365,3 +374,4 @@ function resetGame() {
   showHangman();
   showWord();
 }
+
