@@ -20,7 +20,7 @@ console.log(selectedWord);
 
 var bodyParts = 0;
 
-var tries = 6;
+var tries =6;
 
 var enteredLetters = [];
 
@@ -89,7 +89,7 @@ hint.appendChild(hintContent);
 
 var hintNumber = document.createElement("div");
 hintNumber.className = "hint__number";
-hintNumber.textContent = "1";
+hintNumber.textContent = "<-";
 hint.appendChild(hintNumber);
 
 var word = document.createElement("div");
@@ -196,6 +196,7 @@ function showHangman() {
   if (currentPart !== hang) {
     hang.style.display = "none";
   } else if (currentPart === hang) {
+    tries = 5
     head.style.display = "none";
     body.style.display = "none";
     leftHand.style.display = "none";
@@ -205,8 +206,24 @@ function showHangman() {
   }
   if (currentPart === rightLeg) {
     isHanged();
+    tries = 0
   }
-}
+  if (currentPart === head) {
+       tries = 4
+  }
+  if (currentPart === body) {
+    tries = 3;
+  }
+  if (currentPart === leftHand) {
+    tries = 2
+  }
+  if (currentPart === rightHand) {
+    tries = 1
+  }
+  if (currentPart === leftLeg) {
+    tries = 0;
+  }
+  }
 
 window.addEventListener("DOMContentLoaded", showHangman);
 
@@ -258,7 +275,6 @@ function userLetters(letterDivs) {
 
       if (!selectedWord.includes(letter)) {
         bodyParts++;
-        tries--;
       }
 
       console.log(enteredLetters);
@@ -287,7 +303,6 @@ document.addEventListener("keydown", function (event) {
 
       if (!selectedWord.includes(letter)) {
         bodyParts++;
-        tries--;
       }
 
       console.log(enteredLetters);
