@@ -136,9 +136,17 @@ var modalLoose = document.createElement("div");
 modalLoose.className = "modalLoose";
 document.body.insertBefore(modalLoose, document.body.firstChild);
 
+var modalLoosewindow = document.createElement("div");
+modalLoosewindow.className = "modalLoose__window";
+modalLoose.appendChild(modalLoosewindow);
+
+var modalLooseimg = document.createElement("div");
+modalLooseimg.className = "modalLoose__img";
+modalLoosewindow.appendChild(modalLooseimg);
+
 var modalLooseContent = document.createElement("div");
 modalLooseContent.className = "modalLoose__content";
-modalLoose.appendChild(modalLooseContent);
+modalLoosewindow.appendChild(modalLooseContent);
 
 var modalLooseText = document.createElement("h1");
 modalLooseText.textContent = "You loose!";
@@ -158,9 +166,17 @@ var modal = document.createElement("div");
 modal.className = "modal";
 document.body.insertBefore(modal, document.body.firstChild);
 
+var modalwindow = document.createElement("div");
+modalwindow.className = "modal__window";
+modal.appendChild(modalwindow);
+
+var modalimg = document.createElement("div");
+modalimg.className = "modal__img";
+modalwindow.appendChild(modalimg);
+
 var modalContent = document.createElement("div");
 modalContent.className = "modal__content";
-modal.appendChild(modalContent);
+modalwindow.appendChild(modalContent);
 
 var modalText = document.createElement("h1");
 modalText.textContent = "You win!";

@@ -36,20 +36,6 @@ main {
   grid-area: main;
 }
 
-@media only screen and (min-width: 768px) and (max-width: 1440px) {
-  body {
-    grid-template-columns: 1fr;
-    grid-template-rows: auto auto;
-    grid-template-areas: "aside" "main";
-  }
-}
-@media only screen and (min-width: 360px) and (max-width: 768px) {
-  body {
-    grid-template-columns: 1fr;
-    grid-template-rows: auto auto;
-    grid-template-areas: "aside" "main";
-  }
-}
 .hang {
   display: none;
   width: 48px;
@@ -253,14 +239,36 @@ span {
   background-color: rgba(217, 254, 149, 0.5);
 }
 
+.modal__window,
+.modalLoose__window {
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  grid-column-gap: 16px;
+  justify-items: start;
+  background-color: #f1f2f2;
+  padding: 96px 96px 96px 116px;
+  width: 40%;
+}
+
+.modalLoose__img {
+  background-image: url(../assets/hangman.svg);
+  align-self: center;
+  height: 220px;
+  width: 150px;
+}
+
+.modal__img {
+  background-image: url(../assets/youwin.svg);
+  align-self: center;
+  height: 180px;
+  width: 180px;
+}
+
 .modal__content,
 .modalLoose__content {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  background-color: #f1f2f2;
-  padding: 96px 96px 96px 116px;
-  width: 50%;
+  align-items: flex-start;
 }
 
 .modal__word,
@@ -287,4 +295,45 @@ span {
   text-decoration: none;
   border: solid 1px #d9fe95;
   cursor: pointer;
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1440px) {
+  body {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+    grid-template-areas: "aside" "main";
+  }
+  .modal__window,
+  .modalLoose__window {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+    grid-row-gap: 40px;
+    justify-items: center;
+  }
+  .modal__content {
+    align-items: center;
+  }
+  .modal__word {
+    text-align: center;
+  }
+}
+@media only screen and (min-width: 360px) and (max-width: 768px) {
+  body {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+    grid-template-areas: "aside" "main";
+  }
+  .modal__window,
+  .modalLoose__window {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+    grid-row-gap: 40px;
+    justify-items: center;
+  }
+  .modal__content {
+    align-items: center;
+  }
+  .modal__word {
+    text-align: center;
+  }
 }/*# sourceMappingURL=styles.css.map */
