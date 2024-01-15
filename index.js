@@ -96,7 +96,7 @@ var word = document.createElement("div");
 word.className = "word";
 wordContainer.appendChild(word);
 
-var wordGuessField = document.createElement("input");
+var wordGuessField = document.createElement("div");
 wordGuessField.className = "word__guessfield";
 wordGuessField.id = "guess_field";
 word.appendChild(wordGuessField);
@@ -229,7 +229,7 @@ window.addEventListener("DOMContentLoaded", showHangman);
 
 // Отображаем угаданные буквы
 var textField = document.getElementById("guess_field");
-textField.value = "*".repeat(selectedWord.length);
+textField.innerHTML = "*".repeat(selectedWord.length);
 
 function showWord() {
   let wordArray = selectedWord.split("");
@@ -244,7 +244,7 @@ function showWord() {
   }
 
   let updatedWord = updatedWordArray.join("");
-  textField.value = updatedWord;
+  textField.innerHTML = updatedWord;
 
   if (selectedWord === updatedWord) {
     isWordGuessed();
