@@ -1,21 +1,24 @@
-var worlds = [
-  "firstworld",
-  "secondworld",
-  "thirdworld",
-  "fourthworld",
-  "fifthworld",
-  "sixthworld",
-  "seventhworld",
-  "eighthworld",
-];
+var questionsAndWords = {
+  "a large predatory mammal, symbolizing strength and power": "lion",
+  "an organ inside the head responsible for thinking and perception": "brain",
+  "a liquid necessary for life, making up a large part of Earth's surface": " water",
+  "a fast means of transportation with two wheels": "bike",
+  "a massive celestial object that emits light due to nuclear reactions": "star",
+  "a small flying insect that can produce a buzzing sound": "fly",
+  "a sweet, edible fruit with a yellow peel": "banana",
+  "a musical instrument with black and white keys": "piano"
+};
+
+var questions = Object.keys(questionsAndWords);
+
+var selectedQuestion = questions[Math.floor(Math.random() * questions.length)];
+
+var selectedWord = questionsAndWords[selectedQuestion];
+console.log(selectedWord);
 
 var bodyParts = 0;
 
 var  enteredLetters = [];
-
-var selectedWord = worlds[Math.floor(Math.random() * worlds.length)];
-console.log(selectedWord);
-
 
 
 // Создаем элементы DOM 
@@ -78,7 +81,7 @@ wordContainer.appendChild(hint);
 
 var hintContent = document.createElement("div");
 hintContent.className = "hint__content";
-hintContent.innerHTML = "<span> Hint:</span><br> household appliance for creating comfort</span>";
+hintContent.innerHTML = "<span> Hint:</span><br>" + selectedQuestion;
 hint.appendChild(hintContent);
 
 var hintNumber = document.createElement("div");
@@ -267,7 +270,10 @@ let hang = document.querySelector(".hang");
 
   // Сбрасываем игру
 function resetGame() {
-  var selectedWord = worlds[Math.floor(Math.random() * worlds.length)];
+ 
+
+var selectedQuestion = questions[Math.floor(Math.random() * questions.length)];
+var selectedWord = questionsAndWords[selectedQuestion];
     console.log(selectedWord);
   var textField = document.getElementById("guess_field");
    textField.value = "*".repeat(selectedWord.length);
