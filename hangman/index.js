@@ -267,7 +267,7 @@ function userLetters(letterDivs) {
 
       if (enteredLetters.includes(letter)) {
         wordInfoContent.innerHTML =
-          "<span>You have already chose this letter. Try another one.</span>";
+          "<span>You have already chose this letter. Try another one.<br>" + "-</span>";
         wordInfoHeader.innerHTML = "<span>--alert</span>";
         return;
       } else {
@@ -325,7 +325,7 @@ document.addEventListener("keydown", function (event) {
       matchedButton.classList.add("active");
     } else {
       wordInfoContent.innerHTML =
-        "<span>You have already chosen this letter. Try another one.</span>";
+      "<span>You have already chose this letter. Try another one.<br>" + "-</span>";
       wordInfoHeader.innerHTML = "<span>--alert</span>";
     }
   } else {

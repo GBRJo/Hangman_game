@@ -68,14 +68,14 @@ main {
     display: none;
     width: 48px;
     height: 168px;
-    background-image: url(/assets/hang.svg);  
+    background-image: url(/hangman/assets/hang.svg);  
 }    
 
 .head {
     display: none;
     width: 200px;
     height: 227px;
-    background-image: url(/assets/head.svg);
+    background-image: url(/hangman/assets/head.svg);
 }
 
 .bodyHands {
@@ -87,21 +87,21 @@ main {
     display: none;
     width: 158px;
     height: 71.64px;
-    background-image: url(/assets/body.svg);
+    background-image: url(/hangman/assets/body.svg);
 }
 
 .leftHand {
     display: none;
     width: 70px;
     height: 71.64px;
-    background-image: url(/assets/hand.svg);
+    background-image: url(/hangman/assets/hand.svg);
 }
 
 .rightHand {
     display: none;
     width: 70px;
     height: 71.64px;
-    background-image: url(/assets/hand.svg);
+    background-image: url(/hangman/assets/hand.svg);
 }
 
 .legs {
@@ -114,14 +114,14 @@ main {
     display: none;
     width: 64px;
     height: 75px;
-    background-image: url(/assets/leg.svg);
+    background-image: url(/hangman/assets/leg.svg);
 }
 
 .leftLeg {
     display: none;
     width: 64px;
     height: 75px;
-    background-image: url(/assets/leg.svg);
+    background-image: url(/hangman/assets/leg.svg);
 }
 
 .body__element1 {
