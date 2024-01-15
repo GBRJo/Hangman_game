@@ -2,7 +2,7 @@ var questionsAndWords = {
   "a large predatory mammal, symbolizing strength and power": "lion",
   "an organ inside the head responsible for thinking and perception": "brain",
   "a liquid necessary for life, making up a large part of Earth's surface":
-    " water",
+    "water",
   "a fast means of transportation with two wheels": "bike",
   "a massive celestial object that emits light due to nuclear reactions":
     "star",
@@ -283,7 +283,7 @@ function userLetters(letterDivs) {
         bodyParts++;
       }
 
-      console.log(enteredLetters);
+      //console.log(enteredLetters);
       showHangman();
       showWord();
       showTries();
@@ -313,7 +313,7 @@ document.addEventListener("keydown", function (event) {
         bodyParts++;
       }
 
-      console.log(enteredLetters);
+      //console.log(enteredLetters);
       showHangman();
       showWord();
       showTries();
@@ -356,22 +356,6 @@ closeButtonLoose.onclick = function () {
 
 // Сбрасываем игру
 function resetGame() {
-  var selectedQuestion =
-    questions[Math.floor(Math.random() * questions.length)];
-  var selectedWord = questionsAndWords[selectedQuestion];
-  hintContent.innerHTML = "<span> Hint:</span><br>" + selectedQuestion;
-  console.log(selectedWord);
-  var textField = document.getElementById("guess_field");
-
-  textField.value = "*".repeat(selectedWord.length);
-  bodyParts = 0;
-
-  enteredLetters = [];
-
-  for (let j = 0; j < letterDivs.length; j++) {
-    letterDivs[j].classList.remove("active");
-  }
-  showHangman();
-  showWord();
+  location.reload();
 }
 
