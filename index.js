@@ -126,6 +126,51 @@ wordInfoHeader.className = "word__info--header";
 wordInfoHeader.textContent = "how to play?";
 wordInfo.appendChild(wordInfoHeader);
 
+var modalLoose = document.createElement("div");
+modalLoose.className = "modalLoose";
+document.body.insertBefore(modalLoose, document.body.firstChild);
+
+var modalLooseContent = document.createElement("div");
+modalLooseContent.className = "modalLoose__content";
+modalLoose.appendChild(modalLooseContent);
+
+var modalLooseText = document.createElement("h1");
+modalLooseText.textContent = "You loose!";
+modalLooseContent.appendChild(modalLooseText);
+
+var modalLooseGuessedWord = document.createElement("h2");
+modalLooseGuessedWord.textContent = "Guessed word is - " + selectedWord;
+modalLooseGuessedWord.className = "modalLoose__word";
+modalLooseContent.appendChild(modalLooseGuessedWord);
+
+var closeButtonLoose = document.createElement("button");
+closeButtonLoose.className = "modalLoose__close";
+closeButtonLoose.textContent = "Try Again";
+modalLooseContent.appendChild(closeButtonLoose);
+
+var modal = document.createElement("div");
+modal.className = "modal";
+document.body.insertBefore(modal, document.body.firstChild);
+
+var modalContent = document.createElement("div");
+modalContent.className = "modal__content";
+modal.appendChild(modalContent);
+
+var modalText = document.createElement("h1");
+modalText.textContent = "You win!";
+modalContent.appendChild(modalText);
+
+var modalGuessedWord = document.createElement("h2");
+modalGuessedWord.textContent = "Guessed word is - " + selectedWord;
+modalGuessedWord.className = "modal__word";
+modalContent.appendChild(modalGuessedWord);
+
+var closeButton = document.createElement("button");
+closeButton.className = "modal__close";
+closeButton.textContent = "Try Again";
+modalContent.appendChild(closeButton);
+
+
 // Отображаем висельника
 function showHangman() {
     var parts = ["hang", "head", "body", "leftHand", "rightHand", "leftLeg", "rightLeg"];
@@ -135,7 +180,10 @@ let hang = document.querySelector(".hang");
       if (currentPart !== hang) {
         hang.style.display = "none";
       }
-     
+      if (currentPart === rightLeg) {
+        isHanged();
+       
+     }
       }
   
   window.addEventListener("DOMContentLoaded", showHangman);
@@ -159,6 +207,10 @@ let hang = document.querySelector(".hang");
   
     let updatedWord = updatedWordArray.join("");
     textField.value = updatedWord;
+
+    if (selectedWord === updatedWord) {
+      isWordGuessed();
+      }
   }
 
   // Обрабатываем введённые буквы
@@ -180,21 +232,7 @@ let hang = document.querySelector(".hang");
   
         this.classList.add("active");
   
-       if (isWordGuessed()) {
-          for (let j = 0; j < letterDivs.length; j++) {
-          letterDivs[j].classList.remove("active");
-        }
-       }
-
- if (bodyParts === 7) {
-    alert ("You loose");
-    isWordGuessed();
-    resetGame();
- } else if (selectedWord === updatedWord) {
-    alert ("You loose");
-    isHangmanHanged();
-    resetGame();
- }
+     
       });
     }
   }
@@ -203,11 +241,34 @@ let hang = document.querySelector(".hang");
 
 // Сбрасываем игру
 function resetGame() {
+  var textField = document.getElementById("guess_field");
+   textField.value = "*".repeat(selectedWord.length);
     bodyParts = 0;
     var selectedWord = worlds[Math.floor(Math.random() * worlds.length)];
     console.log(selectedWord);
-    showHangman();
-    showWord();
+    for (let j = 0; j < letterDivs.length; j++) {
+      letterDivs[j].classList.remove("active");
+    }
+  }
+
+ // Модальные окна
+  function isWordGuessed() {
+    modal.style.display = "flex";
+   
+  }
+
+  closeButton.onclick = function () {
+    modal.style.display = "none";
+    resetGame();
+  }
+
+  function isHanged() {
+    modalLoose.style.display = "flex";
+     }
+
+  closeButtonLoose.onclick = function () {
+    modalLoose.style.display = "none";
+    resetGame();
   }
 
   
