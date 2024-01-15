@@ -179,6 +179,13 @@ let hang = document.querySelector(".hang");
       currentPart.style.display = "block";
       if (currentPart !== hang) {
         hang.style.display = "none";
+      } else if (currentPart === hang) {
+        head.style.display = "none";
+        body.style.display = "none";
+        leftHand.style.display = "none";
+        rightHand.style.display = "none";
+        leftLeg.style.display = "none";
+        rightLeg.style.display = "none";
       }
       if (currentPart === rightLeg) {
         isHanged();
@@ -239,23 +246,10 @@ let hang = document.querySelector(".hang");
   
   userLetters(letterDivs);
 
-// Сбрасываем игру
-function resetGame() {
-  var textField = document.getElementById("guess_field");
-   textField.value = "*".repeat(selectedWord.length);
-    bodyParts = 0;
-    var selectedWord = worlds[Math.floor(Math.random() * worlds.length)];
-    console.log(selectedWord);
-    for (let j = 0; j < letterDivs.length; j++) {
-      letterDivs[j].classList.remove("active");
-    }
-  }
-
  // Модальные окна
   function isWordGuessed() {
     modal.style.display = "flex";
-   
-  }
+    }
 
   closeButton.onclick = function () {
     modal.style.display = "none";
@@ -271,4 +265,17 @@ function resetGame() {
     resetGame();
   }
 
-  
+  // Сбрасываем игру
+function resetGame() {
+  var selectedWord = worlds[Math.floor(Math.random() * worlds.length)];
+    console.log(selectedWord);
+  var textField = document.getElementById("guess_field");
+   textField.value = "*".repeat(selectedWord.length);
+    bodyParts = 0;
+    showHangman();
+    enteredLetters = [];
+    
+    for (let j = 0; j < letterDivs.length; j++) {
+      letterDivs[j].classList.remove("active");
+    }
+  }
