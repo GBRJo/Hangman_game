@@ -230,6 +230,15 @@ let hang = document.querySelector(".hang");
     for (let i = 0; i < letterDivs.length; i++) {
       letterDivs[i].addEventListener("click", function() {
         let letter = this.textContent.toLowerCase();
+        
+        if (enteredLetters.includes(letter)) {
+          wordInfoContent.innerHTML = "<span>You have already guessed this letter. Try another one.</span>";
+          wordInfoHeader.innerHTML = "<span>alert</span>";
+          return;
+        } else {
+          wordInfoContent.textContent = "Read the hint and try to guess the word letter by letter. You can make 6 mistakes. Once the hangman is hanged, the game will end.";
+          wordInfoHeader.textContent = "how to play?";
+        }
         enteredLetters.push(letter);
   
         if (!selectedWord.includes(letter)) {
@@ -269,19 +278,21 @@ let hang = document.querySelector(".hang");
   }
 
   // Сбрасываем игру
-function resetGame() {
- 
-
+function resetGame() { 
 var selectedQuestion = questions[Math.floor(Math.random() * questions.length)];
 var selectedWord = questionsAndWords[selectedQuestion];
+hintContent.innerHTML = "<span> Hint:</span><br>" + selectedQuestion;
     console.log(selectedWord);
   var textField = document.getElementById("guess_field");
+ 
    textField.value = "*".repeat(selectedWord.length);
     bodyParts = 0;
-    showHangman();
+    
     enteredLetters = [];
     
     for (let j = 0; j < letterDivs.length; j++) {
       letterDivs[j].classList.remove("active");
     }
+    showHangman();
+    showWord();
   }

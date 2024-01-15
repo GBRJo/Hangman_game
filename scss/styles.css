@@ -228,6 +228,9 @@ span {
   font-weight: 300;
   line-height: normal;
 }
+.word__info span {
+  color: #E7ABAB;
+}
 
 .word__info--header {
   flex-shrink: 0;
