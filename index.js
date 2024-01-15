@@ -232,7 +232,7 @@ let hang = document.querySelector(".hang");
         let letter = this.textContent.toLowerCase();
         
         if (enteredLetters.includes(letter)) {
-          wordInfoContent.innerHTML = "<span>You have already guessed this letter. Try another one.</span>";
+          wordInfoContent.innerHTML = "<span>You have already chose this letter. Try another one.</span>";
           wordInfoHeader.innerHTML = "<span>alert</span>";
           return;
         } else {
@@ -258,6 +258,39 @@ let hang = document.querySelector(".hang");
   
   userLetters(letterDivs);
 
+  document.addEventListener("keydown", function(event) {
+    let letter = event.key.toLowerCase();
+
+    if (/^[a-z]$/i.test(letter)) {
+
+      if (!enteredLetters.includes(letter)) {
+        wordInfoContent.innerHTML = "Read the hint and try to guess the word letter by letter. You can make 6 mistakes. Once the hangman is hanged, the game will end.";
+        wordInfoHeader.textContent = "how to play?";
+        enteredLetters.push(letter);
+  
+        if (!selectedWord.includes(letter)) {
+          bodyParts++;
+        }
+  
+        console.log(enteredLetters);
+        showHangman();
+        showWord();
+  
+        let letterButtons = Array.from(letterDivs);
+        let matchedButton = letterButtons.find(button => button.textContent.toLowerCase() === letter);
+        matchedButton.classList.add("active");
+    
+      } else {
+        wordInfoContent.innerHTML = "<span>You have already chosen this letter. Try another one.</span>";
+        wordInfoHeader.innerHTML = "<span>alert</span>";
+         }
+    }
+    else {
+      wordInfoContent.innerHTML = "<span>Invalid input. Please enter a valid letter or check your keyboard layout.</span>";
+      wordInfoHeader.innerHTML = "<span>alert</span>";
+    }
+  });
+  userLetters(letterDivs);
  // Модальные окна
   function isWordGuessed() {
     modal.style.display = "flex";
