@@ -219,32 +219,69 @@ function showHangman() {
   if (currentPart === rightLeg) {
     isHanged();
   }
-
-  }
+}
 
 window.addEventListener("DOMContentLoaded", showHangman);
 showHangman();
 // Настройка счетчика попыток
 function showTries() {
-  if (head.style.display === "none" && body.style.display === "none" && leftHand.style.display === "none" && rightHand.style.display === "none" && leftLeg.style.display === "none" && rightLeg.style.display === "none") {
-      tries = 6;
+  if (
+    head.style.display === "none" &&
+    body.style.display === "none" &&
+    leftHand.style.display === "none" &&
+    rightHand.style.display === "none" &&
+    leftLeg.style.display === "none" &&
+    rightLeg.style.display === "none"
+  ) {
+    tries = 6;
   } else if (head.style.display === "block" && body.style.display === "none") {
-      tries = 5;
-  } else if (head.style.display === "block" && body.style.display === "block" && leftHand.style.display === "none") {
-      tries = 4;
-  } else if (head.style.display === "block" && body.style.display === "block" && leftHand.style.display === "block" && rightHand.style.display === "none") {
-      tries = 3;
-  } else if (head.style.display === "block" && body.style.display === "block" && leftHand.style.display === "block" && rightHand.style.display === "block" && leftLeg.style.display === "none") {
-      tries = 2;
-  } else if (head.style.display === "block" && body.style.display === "block" && leftHand.style.display === "block" && rightHand.style.display === "block" && leftLeg.style.display === "block" && rightLeg.style.display === "none") {
-      tries = 1;
-  } else if (head.style.display === "block" && body.style.display === "block" && leftHand.style.display === "block" && rightHand.style.display === "block" && leftLeg.style.display === "block" && rightLeg.style.display === "block") {
-      tries = 0;
+    tries = 5;
+  } else if (
+    head.style.display === "block" &&
+    body.style.display === "block" &&
+    leftHand.style.display === "none"
+  ) {
+    tries = 4;
+  } else if (
+    head.style.display === "block" &&
+    body.style.display === "block" &&
+    leftHand.style.display === "block" &&
+    rightHand.style.display === "none"
+  ) {
+    tries = 3;
+  } else if (
+    head.style.display === "block" &&
+    body.style.display === "block" &&
+    leftHand.style.display === "block" &&
+    rightHand.style.display === "block" &&
+    leftLeg.style.display === "none"
+  ) {
+    tries = 2;
+  } else if (
+    head.style.display === "block" &&
+    body.style.display === "block" &&
+    leftHand.style.display === "block" &&
+    rightHand.style.display === "block" &&
+    leftLeg.style.display === "block" &&
+    rightLeg.style.display === "none"
+  ) {
+    tries = 1;
+  } else if (
+    head.style.display === "block" &&
+    body.style.display === "block" &&
+    leftHand.style.display === "block" &&
+    rightHand.style.display === "block" &&
+    leftLeg.style.display === "block" &&
+    rightLeg.style.display === "block"
+  ) {
+    tries = 0;
   }
   wordInfoContent.innerHTML =
-"Read the hint and try to guess the word letter by letter. You can make " +
-"<span>" + tries + "</span>" +
-" mistakes. Once the man is hanged, the game will end.";
+    "Read the hint and try to guess the word letter by letter. You can make " +
+    "<span>" +
+    tries +
+    "</span>" +
+    " mistakes. Once the man is hanged, the game will end.";
 }
 
 showTries();
@@ -283,14 +320,17 @@ function userLetters(letterDivs) {
 
       if (enteredLetters.includes(letter)) {
         wordInfoContent.innerHTML =
-          "<span>You have already chose this letter. Try another one.<br>" + "-</span>";
+          "<span>You have already chose this letter. Try another one.<br>" +
+          "-</span>";
         wordInfoHeader.innerHTML = "<span>--alert</span>";
         return;
       } else {
         wordInfoContent.innerHTML =
-        "Read the hint and try to guess the word letter by letter. You can make " +
-        "<span>" + tries + "</span>" +
-        " mistakes. Once the man is hanged, the game will end.";
+          "Read the hint and try to guess the word letter by letter. You can make " +
+          "<span>" +
+          tries +
+          "</span>" +
+          " mistakes. Once the man is hanged, the game will end.";
         wordInfoHeader.textContent = "--how to play?";
       }
       enteredLetters.push(letter);
@@ -299,13 +339,12 @@ function userLetters(letterDivs) {
         bodyParts++;
       }
 
-      //console.log(enteredLetters);
+      console.log(enteredLetters);
       showHangman();
       showWord();
       showTries();
 
       this.classList.add("active");
-     
     });
   }
 }
@@ -317,11 +356,13 @@ document.addEventListener("keydown", function (event) {
 
   if (/^[a-z]$/i.test(letter)) {
     if (!enteredLetters.includes(letter)) {
-         wordInfoContent.innerHTML =
+      wordInfoContent.innerHTML =
         "Read the hint and try to guess the word letter by letter. You can make " +
-        "<span>" + tries + "</span>" +
+        "<span>" +
+        tries +
+        "</span>" +
         " mistakes. Once the man is hanged, the game will end.";
-      
+
       wordInfoHeader.textContent = "--how to play?";
       enteredLetters.push(letter);
 
@@ -329,7 +370,7 @@ document.addEventListener("keydown", function (event) {
         bodyParts++;
       }
 
-      //console.log(enteredLetters);
+      console.log(enteredLetters);
       showHangman();
       showWord();
       showTries();
@@ -341,7 +382,8 @@ document.addEventListener("keydown", function (event) {
       matchedButton.classList.add("active");
     } else {
       wordInfoContent.innerHTML =
-      "<span>You have already chose this letter. Try another one.<br>" + "-</span>";
+        "<span>You have already chose this letter. Try another one.<br>" +
+        "-</span>";
       wordInfoHeader.innerHTML = "<span>--alert</span>";
     }
   } else {
@@ -370,8 +412,30 @@ closeButtonLoose.onclick = function () {
   resetGame();
 };
 
-// Сбрасываем игру
+//Сбрасываем игру
 function resetGame() {
-  location.reload();
-}
+  questions = Object.keys(questionsAndWords);
 
+  selectedQuestion = questions[Math.floor(Math.random() * questions.length)];
+  hintContent.innerHTML = "<span> Hint:</span><br>" + selectedQuestion;
+  selectedWord = questionsAndWords[selectedQuestion];
+
+  console.log(selectedWord);
+
+  bodyParts = 0;
+  tries = 6;
+  enteredLetters = [];
+
+  var letterDivs = document.getElementsByClassName("word__keyboard--letter");
+  for (let i = 0; i < letterDivs.length; i++) {
+    letterDivs[i].classList.remove("active");
+  }
+
+  window.addEventListener("DOMContentLoaded", showHangman);
+  showHangman();
+  showTries();
+  textField.innerHTML = "*".repeat(selectedWord.length);
+
+  modalLooseGuessedWord.textContent = "Guessed word is - " + selectedWord;
+  modalGuessedWord.textContent = "Guessed word is - " + selectedWord;
+}
