@@ -414,9 +414,13 @@ closeButtonLoose.onclick = function () {
 
 //Сбрасываем игру
 function resetGame() {
-  questions = Object.keys(questionsAndWords);
-
-  selectedQuestion = questions[Math.floor(Math.random() * questions.length)];
+    questions = Object.keys(questionsAndWords);
+  
+    let previousQuestion = selectedQuestion;
+    do {
+      selectedQuestion = questions[Math.floor(Math.random() * questions.length)];
+    } while (selectedQuestion === previousQuestion);
+  
   hintContent.innerHTML = "<span> Hint:</span><br>" + selectedQuestion;
   selectedWord = questionsAndWords[selectedQuestion];
 
