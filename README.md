@@ -16,14 +16,3 @@ The rules is easy: read the hint and try to guess the word letter by letter. You
 ### Development
 
 During the development phase, we utilized a robust stack of technologies including JavaScript for scripting, HTML and CSS for structuring and styling our web content, and Figma, Adobe illustrator, Adobe photoshop for design.
-
-
-
-
-
-
-
-
-
-
-https://gbrjo.github.io/Hangman_game/hangman/index.html
