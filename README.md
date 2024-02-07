@@ -2,7 +2,7 @@
 
 ### Description
 
-This is a student project. It is a small interactive game. In this game pleer must try to guess the word letter by letter.
+This is a student project. It is a small interactive game. In this game, players must try to guess the wordr.
 Try the game live [here](https://gbrjo.github.io/Hangman_game/hangman/index.html)!
 
 ### Preview
